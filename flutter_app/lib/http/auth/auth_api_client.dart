@@ -13,10 +13,10 @@ class AuthApiClient {
 
   AuthApiClient._internal();
 
-  Dio dio = DioProvider.getDio();
+  final Dio _dio = DioProvider.getDio();
 
   Future<AuthApiResponse> login(AuthApiRequest request) async {
-    final response = await dio.post('/login', data: request.toJson());
+    final response = await _dio.post('/token', data: request.toJson());
 
     if (response.statusCode != 200) {
       // [2]

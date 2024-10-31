@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/http/auth/auth_api_client.dart';
+import 'package:flutter_app/http/auth/auth_api_model.dart';
 import 'package:flutter_app/screen/appbar.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  final AuthApiClient authApiClient = AuthApiClient();
 
   static const String title = 'Login';
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +19,26 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
               obscureText: true,
-              decoration: InputDecoration(
+              controller: passController,
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                authApiClient.login(
+                    AuthApiRequest(passController.text, emailController.text));
+              },
               child: const Text('Login'),
             ),
           ],
