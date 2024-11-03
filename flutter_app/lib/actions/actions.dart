@@ -8,12 +8,12 @@ List<Widget> getActions(BuildContext context, LoginState state) => [
         tooltip: 'main',
         path: '/',
       ),
-      // if (state is LoginSuccess)
-      const ActionWidget(
-          iconData: Icons.safety_check, path: '/logout', tooltip: 'logout'),
-      // else
-      const ActionWidget(
-          iconData: Icons.safety_check, path: '/login', tooltip: 'login'),
+      if (state is LoginSuccess)
+        const ActionWidget(
+            iconData: Icons.safety_check, path: '/logout', tooltip: 'logout')
+      else
+        const ActionWidget(
+            iconData: Icons.safety_check, path: '/login', tooltip: 'login'),
     ];
 
 class ActionWidget extends StatelessWidget {

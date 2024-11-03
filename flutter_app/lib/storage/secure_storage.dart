@@ -34,5 +34,26 @@ class SecureStorage {
   AndroidOptions _getAndroidOptions() =>
       const AndroidOptions(encryptedSharedPreferences: true);
 
-  void clean() {}
+  void clean() async {
+    _storage.deleteAll();
+  }
+
+  Future<String?> getRefresh() {
+    return _storage.read(
+      key: 'refresh',
+      iOptions: _getIOSOptions(),
+      aOptions: _getAndroidOptions(),
+    );
+  }
+
+  void putRefresh(String refresh) async {
+    debugPrint("Refresh token put to storage");
+    await _storage.write(
+      key: 'refresh',
+      value: refresh,
+      iOptions: _getIOSOptions(),
+      aOptions: _getAndroidOptions(),
+    );
+    debugPrint("Refresh token was updated");
+  }
 }
