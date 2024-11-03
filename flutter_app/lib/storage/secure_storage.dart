@@ -23,14 +23,8 @@ class SecureStorage {
     debugPrint("Jwt was updated");
   }
 
-  String? getJwt() {
-    final response = _storage.read(key: 'jwt');
-    response.then((onValue) {
-      return onValue;
-    }).catchError((onError) {
-      return null;
-    });
-    return null;
+  Future<String?> getJwt() {
+    return _storage.read(key: 'jwt');
   }
 
   IOSOptions _getIOSOptions() => const IOSOptions(
