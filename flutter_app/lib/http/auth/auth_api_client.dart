@@ -1,11 +1,15 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app/http/auth/auth_api_model.dart';
 import 'package:flutter_app/http/dio_provider.dart';
+import 'package:flutter_app/storage/secure_storage.dart';
 
 class AuthApiClient {
   static final AuthApiClient _singleton = AuthApiClient._internal();
+  SecureStorage secureStorage = SecureStorage();
 
   factory AuthApiClient() {
     return _singleton;
@@ -20,11 +24,14 @@ class AuthApiClient {
 
     if (response.statusCode != 200) {
       // [2]
-      throw Exception('Failed to create post ${response.data}');
+      throw Exception('Failed to create post ${response.data.toString()}');
     }
+ 
+    debugPrint("response: ${response.data.toString()}");
+    final parsedResponse = AuthApiResponse.fromJson(response.data);
+    secureStorage.putJwt(parsedResponse.jwt);
+    
 
-    final jsonResponse = jsonDecode(response.data);
-
-    return AuthApiResponse.fromJson(jsonResponse);
+    return parsedResponse;
   }
 }
