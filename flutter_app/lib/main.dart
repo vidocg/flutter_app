@@ -5,16 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'screen/login/login_bloc.dart';
 
 void main() {
-  runApp( MultiBlocProvider(
-          providers: [
-            BlocProvider<LoginBloc>(
-              create: (context) =>
-                 LoginBloc(), lazy: false,
-            ),
-
-          ],
-          child: MyApp()
-      ));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<LoginBloc>(
+      create: (context) => LoginBloc(),
+      lazy: false,
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

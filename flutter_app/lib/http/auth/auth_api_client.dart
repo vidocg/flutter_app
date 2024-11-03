@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -26,11 +25,11 @@ class AuthApiClient {
       // [2]
       throw Exception('Failed to create post ${response.data.toString()}');
     }
- 
+
     debugPrint("response: ${response.data.toString()}");
-    final parsedResponse = AuthApiResponse.fromJson(response.data);
+    var jsonDecodeResponse = jsonDecode(response.data);
+    final parsedResponse = AuthApiResponse.fromJson(jsonDecodeResponse);
     secureStorage.putJwt(parsedResponse.jwt);
-    
 
     return parsedResponse;
   }

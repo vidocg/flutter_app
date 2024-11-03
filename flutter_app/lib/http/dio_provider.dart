@@ -6,7 +6,10 @@ import 'package:flutter_app/storage/secure_storage.dart';
 class DioProvider {
   static Dio? _dio;
   static Dio _initDio() {
-    Dio dio = Dio(BaseOptions(baseUrl: "http://localhost:9993"));
+    // Dio dio = Dio(BaseOptions(baseUrl: "http://localhost:9993"));
+
+    Dio dio = Dio(BaseOptions(
+        baseUrl: "https://f512312b-5c11-472f-8be8-084e2d317564.mock.pstmn.io"));
 
     dio.interceptors.add(ErrorResponseInterceptor());
 

@@ -5,7 +5,7 @@ import 'package:flutter_app/validators/validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -47,15 +47,15 @@ class LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextFormField(
                       controller: _emailController,
-                      validator: (value) => Validator.password(value),
+                      validator: (value) => Validator.email(value),
                       decoration: const InputDecoration(
-                        labelText: 'Email',
-                      ),
+                          labelText: 'Email', hintText: "Enter your email"),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       obscureText: true,
                       controller: _passController,
+                      validator: (value) => Validator.password(value),
                       decoration: const InputDecoration(
                         labelText: 'Password',
                         hintText: "Enter your password",
