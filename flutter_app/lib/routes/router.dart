@@ -23,9 +23,8 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
       ),
       GoRoute(
         path: 'logout',
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return DialogPage(builder: (_) => LogoutScreen());
-        },
+        pageBuilder: (context, state) =>
+            DialogPage(builder: (_) => LogoutScreen()),
       ),
     ],
   ),
