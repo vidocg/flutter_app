@@ -3,6 +3,7 @@ import 'package:flutter_app/screen/appbar.dart';
 import 'package:flutter_app/screen/login/login_bloc.dart';
 import 'package:flutter_app/validators/validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,7 +30,8 @@ class LoginScreenState extends State<LoginScreen> {
     final loginBloc = BlocProvider.of<LoginBloc>(context);
     return Scaffold(
         appBar: getAppBar(context, title),
-        body: BlocListener<LoginBloc, LoginState>(listener: (context, state) {
+        body: BlocListener<LoginBloc, LoginState>(listener:
+            (loginContext, state) {
           if (state is LoginFailure) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
@@ -38,7 +40,8 @@ class LoginScreenState extends State<LoginScreen> {
                 duration: const Duration(seconds: 3),
               ));
           }
-        }, child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+        }, child:
+            BlocBuilder<LoginBloc, LoginState>(builder: (loginContext, state) {
           return Form(
               key: _formKey,
               child: Center(
@@ -72,6 +75,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     password: _passController.text,
                                   ),
                                 );
+                                loginContext.go('/');
                               }
                             }
                           : null,
