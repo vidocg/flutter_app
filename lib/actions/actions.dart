@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screen/login/login_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-List<Widget> getActions(BuildContext context) => [
+List<Widget> getActions(BuildContext context, LoginState state) => [
       const ActionWidget(
         iconData: Icons.shop,
         tooltip: 'main',
         path: '/',
       ),
-      const ActionWidget(
-          iconData: Icons.safety_check, path: '/login', tooltip: 'login'),
+      if (state is LoginSuccess)
+        const ActionWidget(
+            iconData: Icons.safety_check, path: '/logout', tooltip: 'logout')
+      else
+        const ActionWidget(
+            iconData: Icons.safety_check, path: '/login', tooltip: 'login'),
     ];
 
 class ActionWidget extends StatelessWidget {
