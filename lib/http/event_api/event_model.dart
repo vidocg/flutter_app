@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+part 'event_model.g.dart';
+
 @JsonSerializable()
 class EventRequest {
   EventRequest(this.pageSize, this.pageNumber, this.sort, this.asc);
@@ -7,7 +9,6 @@ class EventRequest {
   int pageNumber;
   String? sort;
   bool asc;
-
   factory EventRequest.fromJson(Map<String, dynamic> json) =>
       _$EventRequestFromJson(json);
 
