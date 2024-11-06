@@ -9,14 +9,16 @@ class LogoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginBloc = BlocProvider.of<LoginBloc>(context);
 
-    return Column(
-      children: [
+    return AlertDialog(
+      title: Text("Log out"),
+      content: Text("Are you sure?"),
+      actions: [
         ElevatedButton(
             onPressed: () {
               loginBloc.add(LogoutButtonPressed());
               context.go('/');
             },
-            child: const Text("Log out"))
+            child: const Text("Log out")),
       ],
     );
   }
