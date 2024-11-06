@@ -17,17 +17,19 @@ class _EventTableState extends State<EventTable> {
   int _columnIndex = 0;
   bool _columnAscending = true;
 
-  void _sort(int columnIndex, bool ascending) {
-    setState(() async {
+  void _sort(int columnIndex, bool ascending) async {
+    var events = await eventClient.getEvents(EventRequest(1, 1, null, false));
+    setState(() {
       //todo: request events by index and asc
       _columnIndex = columnIndex;
       _columnAscending = ascending;
-      var events = await eventClient.getEvents(EventRequest(1, 1, null, false));
       dataSource.setData([events], _columnIndex, _columnAscending);
     });
   }
 
-  init() {
+  @override
+  initState() {
+    super.initState();
     debugPrint("Init event table");
     _sort(_columnIndex, _columnAscending);
   }
@@ -39,23 +41,11 @@ class _EventTableState extends State<EventTable> {
       sortAscending: _columnAscending,
       columns: <DataColumn>[
         DataColumn(
-          label: const Text('Episode'),
+          label: const Text('val one'),
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('Title'),
-          onSort: _sort,
-        ),
-        DataColumn(
-          label: const Text('Director'),
-          onSort: _sort,
-        ),
-        DataColumn(
-          label: const Text('Writer(s)'),
-          onSort: _sort,
-        ),
-        DataColumn(
-          label: const Text('Air Date'),
+          label: const Text('val two'),
           onSort: _sort,
         ),
       ],

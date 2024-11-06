@@ -8,6 +8,11 @@ List<Widget> getActions(BuildContext context, LoginState state) => [
         tooltip: 'main',
         path: '/',
       ),
+      const ActionWidget(
+        iconData: Icons.shop,
+        tooltip: 'events',
+        path: '/events',
+      ),
       if (state is LoginSuccess)
         const ActionWidget(
             iconData: Icons.safety_check, path: '/logout', tooltip: 'logout')

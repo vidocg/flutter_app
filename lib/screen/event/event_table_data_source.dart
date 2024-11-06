@@ -32,9 +32,10 @@ class EventTableDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     return DataRow.byIndex(
-      index: sortedData[index].valTwo as int,
+      index: index,
       cells: <DataCell>[
         cellFor(sortedData[index].valOne),
+        cellFor(sortedData[index].valTwo),
       ],
     );
   }

@@ -15,18 +15,20 @@ class EventClient {
   final Dio _dio = DioProvider.getDio();
 
   Future<EventResponse> getEvents(EventRequest request) async {
-    final response = await _dio.get('/events', queryParameters: {
-      if (request.sort != null)
-        "sort": "${request.sort},${request.asc ? "ASC" : "DESC"}",
-    });
+    // final response = await _dio.get('/events', queryParameters: {
+    //   if (request.sort != null)
+    //     "sort": "${request.sort},${request.asc ? "ASC" : "DESC"}",
+    // });
 
-    if (response.statusCode != 200) {
-      // [2]
-      throw Exception('Failed to create post ${response.data}');
-    }
+    // if (response.statusCode != 200) {
+    //   // [2]
+    //   throw Exception('Failed to create post ${response.data}');
+    // }
 
-    final jsonResponse = jsonDecode(response.data);
+    // final jsonResponse = jsonDecode(response.data);
 
-    return EventResponse.fromJson(jsonResponse);
+    // return EventResponse.fromJson(jsonResponse);
+
+    return Future.value(EventResponse("testOne", "testTwo"));
   }
 }
