@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_app/http/dio_provider.dart';
 import 'package:flutter_app/http/event_api/event_model.dart';

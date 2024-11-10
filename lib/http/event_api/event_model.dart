@@ -17,12 +17,22 @@ class EventRequest {
 
 @JsonSerializable()
 class EventResponse {
-  EventResponse(this.valOne, this.valTwo);
-  String valOne;
-  String valTwo;
+  EventResponse(this.events);
+  List<Event> events;
 
   factory EventResponse.fromJson(Map<String, dynamic> json) =>
       _$EventResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$EventResponseToJson(this);
+}
+
+@JsonSerializable()
+class Event {
+  Event(this.date, this.venue);
+  DateTime date;
+  String venue;
+
+  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventToJson(this);
 }
