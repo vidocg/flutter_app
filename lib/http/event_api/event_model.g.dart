@@ -23,12 +23,22 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) =>
 
 EventResponse _$EventResponseFromJson(Map<String, dynamic> json) =>
     EventResponse(
-      json['valOne'] as String,
-      json['valTwo'] as String,
+      (json['events'] as List<dynamic>)
+          .map((e) => Event.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$EventResponseToJson(EventResponse instance) =>
     <String, dynamic>{
-      'valOne': instance.valOne,
-      'valTwo': instance.valTwo,
+      'events': instance.events,
+    };
+
+Event _$EventFromJson(Map<String, dynamic> json) => Event(
+      DateTime.parse(json['date'] as String),
+      json['venue'] as String,
+    );
+
+Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
+      'date': instance.date.toIso8601String(),
+      'venue': instance.venue,
     };
