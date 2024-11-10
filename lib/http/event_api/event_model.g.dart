@@ -26,11 +26,13 @@ EventResponse _$EventResponseFromJson(Map<String, dynamic> json) =>
       (json['events'] as List<dynamic>)
           .map((e) => Event.fromJson(e as Map<String, dynamic>))
           .toList(),
+      CustomPage.fromJson(json['page'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EventResponseToJson(EventResponse instance) =>
     <String, dynamic>{
       'events': instance.events,
+      'page': instance.page,
     };
 
 Event _$EventFromJson(Map<String, dynamic> json) => Event(

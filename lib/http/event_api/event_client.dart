@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_app/http/dio_provider.dart';
 import 'package:flutter_app/http/event_api/event_model.dart';
+import 'package:flutter_app/http/model.dart';
 
 class EventClient {
   static final EventClient _singleton = EventClient._internal();
@@ -26,7 +27,11 @@ class EventClient {
     // final jsonResponse = jsonDecode(response.data);
 
     // return EventResponse.fromJson(jsonResponse);
+    List<Event> events = [];
 
-    return Future.value(EventResponse("testOne", "testTwo"));
+    for (int i = 0; i < 30; i++) {
+      events.add(Event(DateTime.now(), "venue $i"));
+    }
+    return Future.value(EventResponse(events, CustomPage(2, 2, 2)));
   }
 }

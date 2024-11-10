@@ -16,14 +16,16 @@ class _EventTableState extends State<EventTable> {
 
   int _columnIndex = 0;
   bool _columnAscending = true;
+  int _rowsPerPage = 11;
 
   void _sort(int columnIndex, bool ascending) async {
-    var events = await eventClient.getEvents(EventRequest(1, 1, null, false));
+    var response = await eventClient.getEvents(EventRequest(1, 1, null, false));
+    debugPrint("enevnts api response $response");
     setState(() {
       //todo: request events by index and asc
       _columnIndex = columnIndex;
       _columnAscending = ascending;
-      dataSource.setData([events], _columnIndex, _columnAscending);
+      dataSource.setData(response, _columnIndex, _columnAscending);
     });
   }
 
@@ -39,13 +41,20 @@ class _EventTableState extends State<EventTable> {
     return PaginatedDataTable(
       sortColumnIndex: _columnIndex,
       sortAscending: _columnAscending,
+      rowsPerPage: _rowsPerPage,
+      availableRowsPerPage: const <int>[5, 11, 15, 20],
+      onRowsPerPageChanged: (value) {
+        setState(() {
+          _rowsPerPage = value!;
+        });
+      },
       columns: <DataColumn>[
         DataColumn(
-          label: const Text('val one'),
+          label: const Text('Date'),
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('val two'),
+          label: const Text('Venue'),
           onSort: _sort,
         ),
       ],

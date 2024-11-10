@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/http/event_api/event_model.dart';
+import 'package:flutter_app/http/model.dart';
 
 class EventTableDataSource extends DataTableSource {
-  static const List<int> _displayIndexToRawIndex = <int>[0, 3, 4, 5, 6];
-
-  late List<EventResponse> sortedData;
-  void setData(List<EventResponse> data, int sortColumn, bool sortAscending) {
-    sortedData = data;
+  late List<Event> events;
+  late CustomPage page;
+  void setData(EventResponse data, int sortColumn, bool sortAscending) {
+    events = data.events;
+    page = data.page;
     // ..sort((List<Comparable<Object>> a, List<Comparable<Object>> b) {
     //   final Comparable<Object> cellA = a[_displayIndexToRawIndex[sortColumn]];
     //   final Comparable<Object> cellB = b[_displayIndexToRawIndex[sortColumn]];
@@ -16,7 +17,7 @@ class EventTableDataSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => sortedData.length;
+  int get rowCount => page.itemsNum;
 
   static DataCell cellFor(Object data) {
     String value;
@@ -34,8 +35,8 @@ class EventTableDataSource extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       cells: <DataCell>[
-        cellFor(sortedData[index].valOne),
-        cellFor(sortedData[index].valTwo),
+        cellFor(events[index].date),
+        cellFor(events[index].venue),
       ],
     );
   }

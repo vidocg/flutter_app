@@ -1,3 +1,4 @@
+import 'package:flutter_app/http/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'event_model.g.dart';
@@ -17,8 +18,9 @@ class EventRequest {
 
 @JsonSerializable()
 class EventResponse {
-  EventResponse(this.events);
+  EventResponse(this.events, this.page);
   List<Event> events;
+  CustomPage page;
 
   factory EventResponse.fromJson(Map<String, dynamic> json) =>
       _$EventResponseFromJson(json);
